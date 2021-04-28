@@ -1,12 +1,22 @@
 package gocv
 
 /*
-#include <stdlib.h>
-#include "imgcodecs.h"
+   #include <stdlib.h>
+   #include "imgcodecs.h"
 */
 import "C"
-import (
-	"unsafe"
+import "unsafe"
+
+// FileExt represents a file extension.
+type FileExt string
+
+const (
+	// PNGFileExt is the file extension for PNG.
+	PNGFileExt FileExt = ".png"
+	// JPEGFileExt is the file extension for JPEG.
+	JPEGFileExt FileExt = ".jpg"
+	// GIFFileExt is the file extension for GIF.
+	GIFFileExt FileExt = ".gif"
 )
 
 // IMReadFlag is one of the valid flags to use for the IMRead function.
@@ -177,18 +187,6 @@ func IMWriteWithParams(name string, img Mat, params []int) bool {
 
 	return bool(C.Image_IMWrite_WithParams(cName, img.p, paramsVector))
 }
-
-// FileExt represents a file extension.
-type FileExt string
-
-const (
-	// PNGFileExt is the file extension for PNG.
-	PNGFileExt FileExt = ".png"
-	// JPEGFileExt is the file extension for JPEG.
-	JPEGFileExt FileExt = ".jpg"
-	// GIFFileExt is the file extension for GIF.
-	GIFFileExt FileExt = ".gif"
-)
 
 // IMEncode encodes an image Mat into a memory buffer.
 // This function compresses the image and stores it in the returned memory buffer,
