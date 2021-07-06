@@ -216,6 +216,21 @@ func (m *Mat) Ptr() C.Mat {
 	return m.p
 }
 
+// Clone returns a cloned full copy of the Mat.
+func (m *Mat) Clone() Mat {
+	return newMat(C.Mat_Clone(m.p))
+}
+
+// CopyTo copies Mat into destination Mat.
+//
+// For further details, please see:
+// https://docs.opencv.org/master/d3/d63/classcv_1_1Mat.html#a33fd5d125b4c302b0c9aa86980791a77
+//
+func (m *Mat) CopyTo(dst *Mat) {
+	C.Mat_CopyTo(m.p, dst.p)
+	return
+}
+
 // Empty determines if the Mat is empty or not.
 func (m *Mat) Empty() bool {
 	isEmpty := C.Mat_Empty(m.p)
